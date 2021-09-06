@@ -15,7 +15,7 @@ that you've seen so far. Also, keep track of the integer that had that number of
 public class Ch3p2b {
 
     public static void main(String[] args) {
-        getDivisors(n:100);
+        getDivisors(100);
         int m = 10000;
         int maxCount = 0;
         for (int i = 1; i < m; i++) {
