@@ -24,6 +24,22 @@ public class Ch3p3b {
 
         System.out.println("d12 = " + d2);
 
+        double res = 0;
+        switch (op) {
+            case "+":
+                res = d1 + d2;
+                break;
+            case "-":
+                res = d1 - d2;
+                break;
+            case "*":
+                res = d1 * d2;
+                break;
+            case "/":
+                res = d1 / d2;
+                break;
+        }
+        System.out.println("AI result = " + res);
             }
 
 }
