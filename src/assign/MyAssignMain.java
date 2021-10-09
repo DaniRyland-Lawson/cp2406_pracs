@@ -41,7 +41,9 @@ public class MyAssignMain {
         System.out.println("header" + header[0]);
         System.out.println(Arrays.toString(header));
 
+
         int MONTH_IDX = 3;
+        int DAY_IDX = 4;
         int RAIN_IDX = 5;
 
 //      [Product code,
@@ -58,13 +60,18 @@ public class MyAssignMain {
 //      each month, across the 10+ years’ worth of data
 
         Hashtable<String, Double> monthStats = new Hashtable<>();
+        Hashtable<String, Double> minDailyStats = new Hashtable<>();
+        Hashtable<String, Double> maxDailyStats = new Hashtable<>();
+
 
         for (Iterator iterator = data.iterator(); iterator.hasNext(); ) {
             next =  (String[])iterator.next();
             String rainStr = next[RAIN_IDX];
             String monthStr = next[MONTH_IDX];
+            String dayStr = next[DAY_IDX];
             System.out.println(Arrays.toString(next));
             System.out.println("month = " + monthStr);
+            System.out.println("day = " + dayStr);
             System.out.println("rain = " + rainStr);
             double rain = 0;
             try {
@@ -72,15 +79,34 @@ public class MyAssignMain {
             } catch (Exception e) {
             }
             System.out.println("rain = " + rain);
+
             if (monthStats.containsKey((monthStr))) {
                 double currTotal = monthStats.get(monthStr);
                 monthStats.put(monthStr, currTotal + rain);
             } else {
                 monthStats.put(monthStr, rain);
             }
+
+            String monthDayStr = monthStr + "-day=" + dayStr;
+            if (minDailyStats.containsKey((monthDayStr))) {
+                double currMin = minDailyStats.get(monthDayStr);
+                minDailyStats.put(monthDayStr, Math.min(currMin, rain));
+            } else {
+                minDailyStats.put(monthDayStr, rain);
+            }
+
+            if (maxDailyStats.containsKey((monthDayStr))) {
+                double currMax = maxDailyStats.get(monthDayStr);
+                maxDailyStats.put(monthDayStr, Math.max(currMax, rain));
+            } else {
+                maxDailyStats.put(monthDayStr, rain);
+            }
+
+
         }
         System.out.println(monthStats.toString());
-
+        System.out.println(minDailyStats.toString());
+        System.out.println(maxDailyStats.toString());
         }
         }
 
